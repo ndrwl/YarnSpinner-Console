@@ -363,8 +363,7 @@
                 errorBuilder.AppendLine("Failed to compile because of the following error:");
                 errorBuilder.AppendLine(e.ToString());
 
-                Log.Error(errorBuilder.ToString());
-                Environment.Exit(1);
+                Log.Fatal(errorBuilder.ToString());
 
                 // Environment.Exit will stop the program before here;
                 // throw an exception so the compiler doesn't wonder why
@@ -386,7 +385,7 @@
 
             if (compiledResults.Diagnostics.Any(d => d.Severity == Diagnostic.DiagnosticSeverity.Error))
             {
-                Log.Error($"Not compiling files because errors were encountered.");
+                Log.Fatal($"Not compiling files because errors were encountered.");
                 return;
             }
 
@@ -715,7 +714,7 @@
                 }
                 catch
                 {
-                    Log.Error($"Unable to read {inputFile.FullName}");
+                    Log.Fatal($"Unable to read {inputFile.FullName}");
                 }
             }
 
@@ -729,7 +728,7 @@
                 }
                 catch
                 {
-                    Log.Error($"Unable to write tagged file {pair.Key}");
+                    Log.Fatal($"Unable to write tagged file {pair.Key}");
                 }
             }
         }
